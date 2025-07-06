@@ -10,6 +10,7 @@ import (
 
 var (
 	roundedRectangleRGBA func(*sdl.Renderer, int32, int32, int32, int32, int32, uint8, uint8, uint8, uint8) bool
+	roundedBoxRGBA       func(*sdl.Renderer, int32, int32, int32, int32, int32, uint8, uint8, uint8, uint8) bool
 )
 
 func init() {
@@ -31,4 +32,5 @@ func init() {
 	}
 
 	purego.RegisterLibFunc(&roundedRectangleRGBA, lib, "roundedRectangleRGBA")
+	purego.RegisterLibFunc(&roundedBoxRGBA, lib, "roundedBoxRGBA")
 }
