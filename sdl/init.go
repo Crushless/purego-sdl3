@@ -297,10 +297,10 @@ var (
 	// sdlGetDesktopDisplayMode                 func(DisplayID) *DisplayMode
 	sdlGetDisplayBounds       func(DisplayID, *Rect) bool
 	sdlGetDisplayContentScale func(DisplayID) float32
-	// sdlGetDisplayForPoint                    func(*Point) DisplayID
-	// sdlGetDisplayForRect                     func(*Rect) DisplayID
-	sdlGetDisplayForWindow func(*Window) DisplayID
-	sdlGetDisplayName      func(DisplayID) string
+	sdlGetDisplayForPoint     func(*Point) DisplayID
+	sdlGetDisplayForRect      func(*Rect) DisplayID
+	sdlGetDisplayForWindow    func(*Window) DisplayID
+	sdlGetDisplayName         func(DisplayID) string
 	// sdlGetDisplayProperties                  func(DisplayID) PropertiesID
 	sdlGetDisplays func(*int32) *DisplayID
 	// sdlGetDisplayUsableBounds                func(DisplayID, *Rect) bool

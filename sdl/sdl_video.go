@@ -228,14 +228,17 @@ func GetDisplayContentScale(displayID DisplayID) float32 {
 	return sdlGetDisplayContentScale(displayID)
 }
 
-// func GetDisplayForPoint(point *Point) DisplayID {
-//	return sdlGetDisplayForPoint(point)
-// }
+// GetDisplayForPoint gets the display that contains a point.
+func GetDisplayForPoint(point *Point) DisplayID {
+	return sdlGetDisplayForPoint(point)
+}
 
-// func GetDisplayForRect(rect *Rect) DisplayID {
-//	return sdlGetDisplayForRect(rect)
-// }
+// GetDisplayForRect gets the display that contains a rectangle.
+func GetDisplayForRect(rect *Rect) DisplayID {
+	return sdlGetDisplayForRect(rect)
+}
 
+// GetDisplayForWindow gets the display that contains a window.
 func GetDisplayForWindow(window *Window) DisplayID {
 	return sdlGetDisplayForWindow(window)
 }
