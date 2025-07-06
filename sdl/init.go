@@ -1521,7 +1521,7 @@ func init() {
 	purego.RegisterLibFunc(&sdlGetDefaultCursor, lib, "SDL_GetDefaultCursor")
 	// purego.RegisterLibFunc(&sdlGetDefaultLogOutputFunction, lib, "SDL_GetDefaultLogOutputFunction")
 	// purego.RegisterLibFunc(&sdlGetDesktopDisplayMode, lib, "SDL_GetDesktopDisplayMode")
-	// purego.RegisterLibFunc(&sdlGetDisplayBounds, lib, "SDL_GetDisplayBounds")
+	purego.RegisterLibFunc(&sdlGetDisplayBounds, lib, "SDL_GetDisplayBounds")
 	purego.RegisterLibFunc(&sdlGetDisplayContentScale, lib, "SDL_GetDisplayContentScale")
 	// purego.RegisterLibFunc(&sdlGetDisplayForPoint, lib, "SDL_GetDisplayForPoint")
 	// purego.RegisterLibFunc(&sdlGetDisplayForRect, lib, "SDL_GetDisplayForRect")
