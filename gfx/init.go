@@ -5,11 +5,11 @@ import (
 
 	"github.com/ebitengine/purego"
 	"github.com/jupiterrider/purego-sdl3/internal/shared"
+	"github.com/jupiterrider/purego-sdl3/sdl"
 )
 
 var (
-	roundedRectangleColor uintptr
-	roundedRectangleRGBA  uintptr
+	roundedRectangleRGBA func(*sdl.Renderer, int32, int32, int32, int32, int32, uint8, uint8, uint8, uint8) bool
 )
 
 func init() {
@@ -30,6 +30,5 @@ func init() {
 		panic(err)
 	}
 
-	purego.RegisterLibFunc(&roundedRectangleColor, lib, "roundedRectangleColor")
 	purego.RegisterLibFunc(&roundedRectangleRGBA, lib, "roundedRectangleRGBA")
 }
