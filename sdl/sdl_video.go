@@ -137,6 +137,7 @@ const (
 	WindowPosCentered     = WindowPosCenteredMask
 )
 
+// WindowPosCenteredDisplay returns a window position that is centered on the specified display.
 func WindowPosCenteredDisplay(displayID DisplayID) uint32 {
 	return WindowPosCenteredMask | uint32(displayID)
 }
@@ -150,6 +151,7 @@ func DestroyWindow(window *Window) {
 //	return sdlCreatePopupWindow(parent, offset_x, offset_y, w, h, flags)
 // }
 
+// CreateWindow creates a new window with the specified title, width, height, and flags.
 func CreateWindow(title string, w int32, h int32, flags WindowFlags) *Window {
 	return sdlCreateWindow(title, w, h, flags)
 }
@@ -190,14 +192,21 @@ func CreateWindow(title string, w int32, h int32, flags WindowFlags) *Window {
 //	return sdlEnableScreenSaver()
 // }
 
+// FlashWindow flashes a window to get the user's attention.
 func FlashWindow(window *Window, operation FlashOperation) bool {
 	return sdlFlashWindow(window, operation)
 }
 
-func GetClosestFullscreenDisplayMode(displayID DisplayID, w int32, h int32, refreshRate float32, includeHighDensityModes bool, closest *DisplayMode) bool {
-	return sdlGetClosestFullscreenDisplayMode(displayID, w, h, refreshRate, includeHighDensityModes, closest)
+// GetClosestFullscreenDisplayMode gets the closest fullscreen display mode available on a display
+func GetClosestFullscreenDisplayMode(displayID DisplayID, w int32, h int32, refreshRate float32, includeHighDensityModes bool) *DisplayMode {
+	closest := &DisplayMode{}
+	if ok := sdlGetClosestFullscreenDisplayMode(displayID, w, h, refreshRate, includeHighDensityModes, closest); ok {
+		return closest
+	}
+	return nil
 }
 
+// GetCurrentDisplayMode gets the current display mode of a display, or nil on error.
 func GetCurrentDisplayMode(displayID DisplayID) *DisplayMode {
 	return sdlGetCurrentDisplayMode(displayID)
 }
@@ -206,6 +215,7 @@ func GetCurrentDisplayMode(displayID DisplayID) *DisplayMode {
 //	return sdlGetCurrentDisplayOrientation(displayID)
 // }
 
+// GetCurrentVideoDriver gets the name of the current video driver.
 func GetCurrentVideoDriver() string {
 	return sdlGetCurrentVideoDriver()
 }
@@ -243,6 +253,7 @@ func GetDisplayForWindow(window *Window) DisplayID {
 	return sdlGetDisplayForWindow(window)
 }
 
+// GetDisplayName gets the name of a display.
 func GetDisplayName(displayID DisplayID) string {
 	return sdlGetDisplayName(displayID)
 }
@@ -284,6 +295,7 @@ func GetNumVideoDrivers() int32 {
 	return sdlGetNumVideoDrivers()
 }
 
+// GetPrimaryDisplay gets the primary display of the system.
 func GetPrimaryDisplay() DisplayID {
 	return sdlGetPrimaryDisplay()
 }
@@ -305,6 +317,7 @@ func GetVideoDriver(index int32) string {
 //	return sdlGetWindowBordersSize(window, top, left, bottom, right)
 // }
 
+// GetWindowDisplayScale gets the display scale of a window.
 func GetWindowDisplayScale(window *Window) float32 {
 	return sdlGetWindowDisplayScale(window)
 }
@@ -362,6 +375,7 @@ func GetWindowOpacity(window *Window) float32 {
 //	return sdlGetWindowParent(window)
 // }
 
+// GetWindowPixelDensity gets the pixel density of a window.
 func GetWindowPixelDensity(window *Window) float32 {
 	return sdlGetWindowPixelDensity(window)
 }
@@ -370,6 +384,7 @@ func GetWindowPixelDensity(window *Window) float32 {
 //	return sdlGetWindowPixelFormat(window)
 // }
 
+// GetWindowPosition gets the position of a window in screen coordinates.
 func GetWindowPosition(window *Window, x *int32, y *int32) bool {
 	return sdlGetWindowPosition(window, x, y)
 }
@@ -386,10 +401,12 @@ func GetWindowPosition(window *Window, x *int32, y *int32) bool {
 //	return sdlGetWindowSafeArea(window, rect)
 // }
 
+// GetWindowSize gets the size of a window in screen coordinates.
 func GetWindowSize(window *Window, w *int32, h *int32) bool {
 	return sdlGetWindowSize(window, w, h)
 }
 
+// GetWindowSizeInPixels gets the size of a window in pixels.
 func GetWindowSizeInPixels(window *Window, w *int32, h *int32) bool {
 	return sdlGetWindowSizeInPixels(window, w, h)
 }
@@ -403,6 +420,7 @@ func GetWindowSurface(window *Window) *Surface {
 //	return sdlGetWindowSurfaceVSync(window, vsync)
 // }
 
+// GetWindowTitle gets the title of a window.
 func GetWindowTitle(window *Window) string {
 	return sdlGetWindowTitle(window)
 }
@@ -485,6 +503,7 @@ func RaiseWindow(window *Window) bool {
 	return sdlRaiseWindow(window)
 }
 
+// RestoreWindow restores a minimized or maximized window to its normal state.
 func RestoreWindow(window *Window) bool {
 	return sdlRestoreWindow(window)
 }
@@ -522,6 +541,7 @@ func SetWindowFullscreenMode(window *Window, mode *DisplayMode) bool {
 	return sdlSetWindowFullscreenMode(window, mode)
 }
 
+// SetWindowHitTest sets a hit test callback for a window.
 func SetWindowHitTest(window *Window, callback HitTest, callbackData unsafe.Pointer) bool {
 	wrapper := func(win *Window, point *Point, data unsafe.Pointer) uintptr {
 		return uintptr(callback(win, point, data))
@@ -530,6 +550,7 @@ func SetWindowHitTest(window *Window, callback HitTest, callbackData unsafe.Poin
 	return sdlSetWindowHitTest(window, wrapper, callbackData)
 }
 
+// SetWindowIcon sets the icon for a window.
 func SetWindowIcon(window *Window, icon *Surface) bool {
 	return sdlSetWindowIcon(window, icon)
 }
@@ -570,6 +591,7 @@ func SetWindowOpacity(window *Window, opacity float32) bool {
 //	return sdlSetWindowParent(window, parent)
 // }
 
+// SetWindowPosition sets the position of a window in screen coordinates.
 func SetWindowPosition(window *Window, x int32, y int32) bool {
 	return sdlSetWindowPosition(window, x, y)
 }
@@ -583,6 +605,7 @@ func SetWindowResizable(window *Window, resizable bool) bool {
 //	return sdlSetWindowShape(window, shape)
 // }
 
+// SetWindowSize sets the size of a window in screen coordinates.
 func SetWindowSize(window *Window, w int32, h int32) bool {
 	return sdlSetWindowSize(window, w, h)
 }
@@ -591,6 +614,7 @@ func SetWindowSize(window *Window, w int32, h int32) bool {
 //	return sdlSetWindowSurfaceVSync(window, vsync)
 // }
 
+// SetWindowTitle sets the title of a window.
 func SetWindowTitle(window *Window, title string) bool {
 	return sdlSetWindowTitle(window, title)
 }
@@ -604,6 +628,7 @@ func ShowWindow(window *Window) bool {
 //	return sdlShowWindowSystemMenu(window, x, y)
 // }
 
+// SyncWindow synchronizes the window with the screen.
 func SyncWindow(window *Window) bool {
 	return sdlSyncWindow(window)
 }
